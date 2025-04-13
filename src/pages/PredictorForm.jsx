@@ -1,298 +1,287 @@
-import React, { useState } from "react";
-import Header from "./Header/Header";
-import PersonIcon from "@mui/icons-material/Person";
-import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import CreditScoreIcon from "@mui/icons-material/CreditScore";
-import DnsIcon from "@mui/icons-material/Dns";
-import Divider from "@mui/material/Divider";
-import ChecklistIcon from "@mui/icons-material/Checklist";
-import { Button } from "@mui/material";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import CustomForm from "../components/CustomForm";
+
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import {
+  UserIcon,
+  BriefcaseIcon,
+  CreditCardIcon,
+  BuildingIcon,
+} from 'lucide-react'
 
 const PredictorForm = () => {
-  const [formData, setFormData] = useState({
-    fullname: "",
-    age: "",
-    loanID: "",
-    income: "",
-    loanAmount: "",
-    creditScore: "",
-    monthsEmployed: "",
-    numCreditLines: "",
-    interestRate: "",
-    loanTerm: "",
-    dtiRatio: "",
-    educationStatus: "",
-    employmentType: "",
-    maritalStatus: "",
-    loanPurpose: "",
-    hasMortgage:false,
-    hasDependents:false,
-    hasCoSigner:false,
-});
-
-  console.log(formData);
-
-  const formControlsPersonal = [
-    {
-      name: "fullname",
-      label: "Full name",
-      componentType: "input",
-      placeholder: "Full name",
-      type: "text",
-    },
-    {
-      name: "age",
-      label: "Age",
-      componentType: "input",
-      placeholder: "Enter your age",
-      type: "number",
-    },
-    {
-      name: "educationStatus",
-      label: "Education Status",
-      componentType: "select",
-      options: [
-        { id: "highschool", label: "High School" },
-        { id: "bachelor", label: "Bachelor's Degree" },
-        { id: "master", label: "Master's Degree" },
-        { id: "phd", label: "PhD" },
-      ],
-    },
-    {
-      name: "maritalStatus",
-      label: "Marital Status",
-      componentType: "select",
-      options: [
-        { id: "single", label: "Single" },
-        { id: "married", label: "Married" },
-        { id: "divorced", label: "Divorced" },
-        { id: "widowed", label: "Widowed" },
-      ],
-    },
-  ];
-  const formControlsEmployment = [
-    {
-      name: "employmentType",
-      label: "Employment Type",
-      componentType: "select",
-      options: [
-        { id: "fulltime", label: "Full-Time" },
-        { id: "parttime", label: "Part-Time" },
-        { id: "selfemployed", label: "Self-Employed" },
-        { id: "unemployed", label: "Unemployed" },
-      ],
-    },
-
-    {
-      name: "monthsEmployed",
-      label: "Months Employed",
-      componentType: "input",
-      placeholder: "Enter months employed",
-      type: "number",
-    },
-  ];
-
-  const formControlsCredit = [
-    {
-      name: "income",
-      label: "Income",
-      componentType: "input",
-      placeholder: "Enter your income",
-      type: "number",
-    },
-    {
-      name: "creditScore",
-      label: "Credit Score",
-      componentType: "input",
-      placeholder: "Enter your credit score",
-      type: "number",
-    },
-    {
-      name: "numCreditLines",
-      label: "Number of Credit Lines",
-      componentType: "input",
-      placeholder: "Enter number of credit lines",
-      type: "number",
-    },
-    {
-      name: "dtiRatio",
-      label: "Debt-to-Income Ratio",
-      componentType: "input",
-      placeholder: "Enter DTI ratio",
-      type: "number",
-    },
-  ];
-
-  const formControlsLoan = [
-    {
-      name: "loanAmount",
-      label: "Loan Amount",
-      componentType: "input",
-      placeholder: "Enter loan amount",
-      type: "number",
-    },
-    {
-      name: "interestRate",
-      label: "Interest Rate (%)",
-      componentType: "input",
-      placeholder: "Enter interest rate",
-      type: "number",
-    },
-    {
-      name: "loanTerm",
-      label: "Loan Term (months)",
-      componentType: "input",
-      placeholder: "Enter loan term",
-      type: "number",
-    },
-    {
-      name: "loanPurpose",
-      label: "Loan Purpose",
-      componentType: "select",
-      options: [
-        { id: "home", label: "Home" },
-        { id: "auto", label: "Auto" },
-        { id: "other", label: "Other" },
-        { id: "education", label: "Education" },
-        { id: "business", label: "Business" },
-      ],
-    },
-  ];
-
-  const formControlsOther = [
-    {
-      name: "hasCoSigner",
-      label: "Has Co-Signer",
-      componentType: "checkbox",
-    },
-    {
-      name: "hasDependents",
-      label: "Has Dependents",
-      componentType: "checkbox",
-    },
-    {
-      name: "hasMortgage",
-      label: "Has Mortgage",
-      componentType: "checkbox",
-    },
-  ];
-
+  const navigate = useNavigate()
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    navigate('/prediction')
+  }
   return (
-    <>
-      <Header />
-      <div className="relative w-[89%] h-full bg-white text-black justify-self-center shadow-lg py-2 px-8 pb-4 rounded-lg">
-        <div className="flex items-center gap-4 mb-2">
-          <ChecklistIcon />
-          <h2 className="font-semibold text-lg">Loan Details Form</h2>
+    <div className="container mx-auto px-4 py-8">
+      <div className="max-w-5xl mx-auto bg-white/5 backdrop-blur-sm rounded-lg shadow-lg p-6 border border-gray-700">
+        <div className="flex items-center mb-6">
+          <div className="p-2 rounded-md bg-gray-700/50 mr-3">
+            <CreditCardIcon className="h-5 w-5 text-teal-400" />
+          </div>
+          <h2 className="text-xl font-semibold text-white">
+            Loan Details Form
+          </h2>
         </div>
-        <div className="flex gap-8 mb-4">
-          {/**Left Side */}
-          <div className="flex flex-col flex-1 justify-start gap-3">
-            {/**Personal Details */}
-            <div className="flex gap-2 w-full flex-col">
-              <Divider textAlign="left" className="w-full ">
-                <div className="flex items-center justify-center gap-2">
-                  <PersonIcon className="text-gray-500" />
-                  <span className="text-gray-600 font-semibold">Personal</span>
+        <form onSubmit={handleSubmit}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Personal Information Section */}
+            <div>
+              <div className="flex items-center mb-4">
+                <UserIcon className="h-4 w-4 text-gray-400 mr-2" />
+                <h3 className="text-lg font-medium text-gray-300">Personal</h3>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm text-gray-400 mb-1">
+                    Full name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Full name"
+                    className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-teal-500"
+                  />
                 </div>
-              </Divider>
-              <CustomForm
-                formControls={formControlsPersonal}
-                formData={formData}
-                setFormData={setFormData}
-              />
-            </div>
-
-            {/**Employment Details */}
-            <div className="flex gap-2 w-full flex-col">
-              <Divider textAlign="left" className="w-full ">
-                <div className="flex items-center justify-center gap-2">
-                  <AccountBalanceIcon className="text-gray-500" />
-                  <span className="text-gray-600 font-semibold">
+                <div>
+                  <label className="block text-sm text-gray-400 mb-1">
+                    Age
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="Enter your age"
+                    className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-teal-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-400 mb-1">
+                    Education Status
+                  </label>
+                  <select className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-teal-500">
+                    <option>Education Status</option>
+                    <option>High School</option>
+                    <option>Bachelor's</option>
+                    <option>Master's</option>
+                    <option>PhD</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-400 mb-1">
+                    Marital Status
+                  </label>
+                  <select className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-teal-500">
+                    <option>Marital Status</option>
+                    <option>Single</option>
+                    <option>Married</option>
+                    <option>Divorced</option>
+                    <option>Widowed</option>
+                  </select>
+                </div>
+              </div>
+              <div className="mt-8">
+                <div className="flex items-center mb-4">
+                  <BriefcaseIcon className="h-4 w-4 text-gray-400 mr-2" />
+                  <h3 className="text-lg font-medium text-gray-300">
                     Employment
-                  </span>
+                  </h3>
                 </div>
-              </Divider>
-              <CustomForm
-                formControls={formControlsEmployment}
-                formData={formData}
-                setFormData={setFormData}
-              />
-            </div>
-
-             {/**Other Details */}
-             <div className="flex gap-2 w-full flex-col">
-              <Divider textAlign="left" className="w-full ">
-                <div className="flex items-center justify-center gap-2">
-                  <DnsIcon className="text-gray-500" />
-                  <span className="text-gray-600 font-semibold">Other</span>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm text-gray-400 mb-1">
+                      Employment Type
+                    </label>
+                    <select className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-teal-500">
+                      <option>Employment Type</option>
+                      <option>Full-time</option>
+                      <option>Part-time</option>
+                      <option>Self-employed</option>
+                      <option>Unemployed</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-400 mb-1">
+                      Months Employed
+                    </label>
+                    <input
+                      type="number"
+                      placeholder="Enter months employed"
+                      className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-teal-500"
+                    />
+                  </div>
                 </div>
-              </Divider>
-              <CustomForm
-                formControls={formControlsOther}
-                formData={formData}
-                setFormData={setFormData}
-                ckeckEnable={true}
-              />
-            </div>
-          </div>
-
-          {/**Right Side */}
-          <div className="flex flex-1 flex-col justify-start gap-3">
-            {/**Loan Details */}
-            <div className="flex gap-2 w-full flex-col">
-              <Divider textAlign="left" className="w-full ">
-                <div className="flex items-center justify-center gap-2">
-                  <CreditScoreIcon className="text-gray-500" />
-                  <span className="text-gray-600 font-semibold">Loan</span>
+              </div>
+              <div className="mt-8">
+                <div className="flex items-center mb-4">
+                  <BuildingIcon className="h-4 w-4 text-gray-400 mr-2" />
+                  <h3 className="text-lg font-medium text-gray-300">Other</h3>
                 </div>
-              </Divider>
-              <CustomForm
-                formControls={formControlsLoan}
-                formData={formData}
-                setFormData={setFormData}
-              />
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id="cosigner"
+                      className="h-4 w-4 bg-gray-800 border-gray-700 rounded focus:ring-teal-500 text-teal-500"
+                    />
+                    <label
+                      htmlFor="cosigner"
+                      className="ml-2 text-sm text-gray-300"
+                    >
+                      Has Co-Signer
+                    </label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id="dependents"
+                      className="h-4 w-4 bg-gray-800 border-gray-700 rounded focus:ring-teal-500 text-teal-500"
+                    />
+                    <label
+                      htmlFor="dependents"
+                      className="ml-2 text-sm text-gray-300"
+                    >
+                      Has Dependents
+                    </label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id="mortgage"
+                      className="h-4 w-4 bg-gray-800 border-gray-700 rounded focus:ring-teal-500 text-teal-500"
+                    />
+                    <label
+                      htmlFor="mortgage"
+                      className="ml-2 text-sm text-gray-300"
+                    >
+                      Has Mortgage
+                    </label>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            {/**Credit Status */}
-            <div className="flex gap-2 w-full flex-col">
-              <Divider textAlign="left" className="w-full ">
-                <div className="flex items-center justify-center gap-2">
-                  <CreditCardIcon className="text-gray-500" />
-                  <span className="text-gray-600 font-semibold">
+            {/* Loan and Credit Information Section */}
+            <div>
+              <div className="flex items-center mb-4">
+                <CreditCardIcon className="h-4 w-4 text-gray-400 mr-2" />
+                <h3 className="text-lg font-medium text-gray-300">Loan</h3>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm text-gray-400 mb-1">
+                    Loan Amount
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="Enter loan amount"
+                    className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-teal-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-400 mb-1">
+                    Interest Rate (%)
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="Enter interest rate"
+                    className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-teal-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-400 mb-1">
+                    Loan Term (months)
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="Enter loan term"
+                    className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-teal-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-400 mb-1">
+                    Loan Purpose
+                  </label>
+                  <select className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-teal-500">
+                    <option>Loan Purpose</option>
+                    <option>Home</option>
+                    <option>Education</option>
+                    <option>Vehicle</option>
+                    <option>Business</option>
+                    <option>Personal</option>
+                  </select>
+                </div>
+              </div>
+              <div className="mt-8">
+                <div className="flex items-center mb-4">
+                  <CreditCardIcon className="h-4 w-4 text-gray-400 mr-2" />
+                  <h3 className="text-lg font-medium text-gray-300">
                     Credit Status
-                  </span>
+                  </h3>
                 </div>
-              </Divider>
-              <CustomForm
-                formControls={formControlsCredit}
-                formData={formData}
-                setFormData={setFormData}
-              />
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm text-gray-400 mb-1">
+                      Income
+                    </label>
+                    <input
+                      type="number"
+                      placeholder="Enter your income"
+                      className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-teal-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-400 mb-1">
+                      Credit Score
+                    </label>
+                    <input
+                      type="number"
+                      placeholder="Enter your credit score"
+                      className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-teal-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-400 mb-1">
+                      Number of Credit Lines
+                    </label>
+                    <input
+                      type="number"
+                      placeholder="Enter number of credit lines"
+                      className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-teal-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-400 mb-1">
+                      Debt-to-Income Ratio
+                    </label>
+                    <input
+                      type="number"
+                      placeholder="Enter DTI ratio"
+                      className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-teal-500"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="flex w-full justify-end gap-4">
-          <Button
-            variant="contained"
-            color="error"
-            className=" relative flex gap-3 items-center"
-          >
-            Clear
-          </Button>
-          <Button
-            variant="contained"
-            color="success"
-            className=" relative flex gap-3 items-center"
-          >
-            Submit
-          </Button>
-        </div>
+          <div className="mt-8 flex justify-end space-x-4">
+            <button
+              type="button"
+              className="px-6 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md font-medium transition-colors"
+            >
+              CLEAR
+            </button>
+            <button
+              type="submit"
+              className="px-6 py-2 bg-green-700 hover:bg-green-600 text-white rounded-md font-medium transition-colors"
+            >
+              SUBMIT
+            </button>
+          </div>
+        </form>
       </div>
-    </>
-  );
-};
+    </div>
+  )
+}
 
-export default PredictorForm;
+
+
+export default PredictorForm
