@@ -6,6 +6,7 @@ import PredictionView from './pages/PredictionView'
 import PredictorForm from './pages/PredictorForm'
 import Header from './pages/Header/Header'
 import PredictionResults from './pages/PredictionResults'
+import Login from './pages/Login'
 
 
 
@@ -21,6 +22,7 @@ function App() {
       <Route path="/PredictionView" element={<PredictionView/>}/>
       <Route path="/PredictorForm" element={<PredictorForm/>}/>
       <Route path="/PredictionResults" element={<PredictionResults/>}/>
+      <Route path="/Login" element={<Login/>}/>
     </Routes>
     </div>
     </BrowserRouter>
